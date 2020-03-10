@@ -34,6 +34,8 @@ for line in lines:
 	second_node = int(line.split()[1])
 	Garray[first_node-1, second_node-1] = True
 	GarrayNo[first_node-1,0] = GarrayNo[first_node-1,0] + 1
+	Garray[second_node-1, first_node-1] = True
+	GarrayNo[second_node-1,0] = GarrayNo[second_node-1,0] + 1
 
 
 # Morattabsazi Array nesbat be te'dade yalha
@@ -44,11 +46,9 @@ for i in range(node_number):
 			Garray[[i,j]] = Garray[[j,i]]
 			Garray[:,[i, j]] = Garray[:,[j, i]]
 
-
 start = datetime.now()
 for ColorNo in range(node_number-1,0,-1):
 	# Ta'rife solver
-	print(ColorNo)
 	s = Solver()
 	print('Testing ' + str(ColorNo+1)+ ' Colour(s)')
 	
@@ -72,5 +72,7 @@ for ColorNo in range(node_number-1,0,-1):
 		print('\n')
 		
 #Namayeshe Natayej
+print('\n')
 print('The calculation time is: ' + str(datetime.now()-start))
 print('The minimum number of Colours: ' + str(ColorNo+2))
+print('\n')
