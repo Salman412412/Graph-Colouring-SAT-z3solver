@@ -34,9 +34,6 @@ for line in lines:
 	second_node = int(line.split()[1])
 	Garray[first_node-1, second_node-1] = True
 	GarrayNo[first_node-1,0] = GarrayNo[first_node-1,0] + 1
-#	if not Garray[second_node-1, first_node-1]:
-#		Garray[second_node-1, first_node-1] = True
-#		GarrayNo[second_node-1,0] = GarrayNo[second_node-1,0] + 1
 
 
 # Morattabsazi Array nesbat be te'dade yalha
@@ -46,8 +43,6 @@ for i in range(node_number):
 			GarrayNo[i,0], GarrayNo[j,0] = GarrayNo[j,0], GarrayNo[i,0]
 			Garray[[i,j]] = Garray[[j,i]]
 			Garray[:,[i, j]] = Garray[:,[j, i]]
-print(Garray)
-print(GarrayNo)
 
 
 start = datetime.now()
