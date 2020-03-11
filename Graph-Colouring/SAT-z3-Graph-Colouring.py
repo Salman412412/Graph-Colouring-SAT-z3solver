@@ -46,7 +46,6 @@ for i in range(node_number):
 			Garray[[i,j]] = Garray[[j,i]]
 			Garray[:,[i, j]] = Garray[:,[j, i]]
 
-
 start = datetime.now()
 for ColorNo in range(node_number-1,0,-1):
 	# Ta'rife solver
