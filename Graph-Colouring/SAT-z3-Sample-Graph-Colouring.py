@@ -34,6 +34,9 @@ for line in lines:
 	second_node = int(line.split()[1])
 	Garray[first_node-1, second_node-1] = True
 	GarrayNo[first_node-1,0] = GarrayNo[first_node-1,0] + 1
+	Garray[second_node-1, first_node-1] = True
+	GarrayNo[second_node-1,0] = GarrayNo[second_node-1,0] + 1
+
 
 # Morattabsazi Array nesbat be te'dade yalha
 for i in range(node_number):
@@ -41,17 +44,19 @@ for i in range(node_number):
 		if GarrayNo[j,0] > GarrayNo[i,0]:
 			GarrayNo[i,0], GarrayNo[j,0] = GarrayNo[j,0], GarrayNo[i,0]
 			Garray[[i,j]] = Garray[[j,i]]
+			Garray[:,[i, j]] = Garray[:,[j, i]]
+
 
 start = datetime.now()
-for ColorNo in range(node_number):
+for ColorNo in range(1,node_number):
 	# Ta'rife solver
 	s = Solver()
-	print('Testing ' + str(ColorNo+1)+ ' Colour(s)')
+	print('Testing ' + str(ColorNo)+ ' Colour(s)')
 	
 	#Sharte Te'dade Rangha
 	for i in range(node_number):
 		s.add(Gcolor[i]>=1)
-		s.add(Gcolor[i]<(ColorNo+1))
+		s.add(Gcolor[i]<(ColorNo))
 	
 	#Sharte yeksan nabudane range yalhaye mojaver
 	for i in range(node_number):
@@ -60,14 +65,16 @@ for ColorNo in range(node_number):
 				s.add(Gcolor[i] != Gcolor[j])
 	
 	#Check kardane emkane vojude javab
-	if s.check() == sat:
+	if s.check() == unsat:
+		print('Not Satisfied')
+	else:
 		print('Satisfied')
 		break
-	else:
-		print('Not Satisfied')
-		print('Time till now: '+ str(datetime.now()-start))
-		print('\n')
-
+	print('Time till now: '+ str(datetime.now()-start))
+	print('\n')
+		
 #Namayeshe Natayej
+print('\n')
 print('The calculation time is: ' + str(datetime.now()-start))
 print('The minimum number of Colours: ' + str(ColorNo))
+print('\n')
