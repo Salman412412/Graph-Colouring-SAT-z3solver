@@ -46,16 +46,19 @@ for i in range(node_number):
 			Garray[[i,j]] = Garray[[j,i]]
 			Garray[:,[i, j]] = Garray[:,[j, i]]
 
+lower_band = 1
+upper_band = node_number - 1
 start = datetime.now()
-for ColorNo in range(node_number-1,0,-1):
+while upper_band > (lower_band+1):
+	ColorNo = (upper_band+lower_band)//2
 	# Ta'rife solver
 	s = Solver()
-	print('Testing ' + str(ColorNo+1)+ ' Colour(s)')
+	print('Testing ' + str(ColorNo)+ ' Colour(s)')
 	
 	#Sharte Te'dade Rangha
 	for i in range(node_number):
 		s.add(Gcolor[i]>=1)
-		s.add(Gcolor[i]<(ColorNo+1))
+		s.add(Gcolor[i]<(ColorNo))
 	
 	#Sharte yeksan nabudane range yalhaye mojaver
 	for i in range(node_number):
@@ -65,14 +68,15 @@ for ColorNo in range(node_number-1,0,-1):
 	#Check kardane emkane vojude javab
 	if s.check() == unsat:
 		print('Not Satisfied')
-		break
+		lower_band = ColorNo
 	else:
 		print('Satisfied')
-		print('Time till now: '+ str(datetime.now()-start))
-		print('\n')
+		upper_band = ColorNo
+	print('Time till now: '+ str(datetime.now()-start))
+	print('\n')
 		
 #Namayeshe Natayej
 print('\n')
 print('The calculation time is: ' + str(datetime.now()-start))
-print('The minimum number of Colours: ' + str(ColorNo+2))
+print('The minimum number of Colours: ' + str(ColorNo))
 print('\n')
